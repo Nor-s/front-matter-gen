@@ -1,15 +1,15 @@
 import * as vscode from 'vscode';
 
-import {addDateToFilename, getFileNameFromUser,
+import {formatFilename, getFileNameFromUser,
         openFile, createFile, postSnippet,
         getDateTime, shouldInsertFrontMatter, setFrontMatter} from './utils';
 
 export function
 activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand('extension.jekyllPost',
+  let disposable = vscode.commands.registerCommand('extension.beLikeJekyll.createPost',
     async (uri: vscode.Uri) => {
       const dirName = uri.fsPath;
-      const userFilePath = addDateToFilename(await getFileNameFromUser());
+      const userFilePath = formatFilename(await getFileNameFromUser());
       try {
         let editor = await openFile(await createFile(dirName, userFilePath));
         // Insert snippet only if the user did not provide a template file and

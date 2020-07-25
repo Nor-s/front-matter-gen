@@ -33,7 +33,12 @@ createFile(dirName: string, newFileName: string): Promise<string> {
   if (folders === undefined || dirName === null || dirName === undefined) {
     return newFileName;
   }
-  const templateName = '.post-template';
+
+  if (!fs.lstatSync(dirName).isDirectory() && fs.lstatSync(dirName).isFile()) {
+    dirName = path.dirname(dirName);
+  }
+
+  const templateName: string = vscode.workspace.getConfiguration().get('belikejekyll.template.path') || ".vscode/template/post";
   const templatePath = path.resolve(folders[0].uri.fsPath, templateName);
   const fileName = path.resolve(dirName, newFileName);
   const templateExists: boolean = templatePath !== undefined &&
@@ -95,13 +100,29 @@ getDateTime(): string {
 }
 
 export function
-addDateToFilename(fileName: string): string {
+formatFilename(fileName: string): string {
   if (fileName === null) {
     throw undefined;
   }
+
+  const filenamefmt: string = vscode.workspace.getConfiguration().get('belikejekyll.instance.filename') || "%yyyy%-%mm%-%dd%-%filename%";
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
-  var yyyy = today.getFullYear();
-  return yyyy + '-' + mm + '-' + dd + '-' + fileName;
+  var yyyy = String(today.getFullYear());
+  var yy = yyyy.substr(2, 2);
+
+  var hh = String(today.getHours());
+  var ii = String(today.getMinutes());
+  var ss = String(today.getSeconds());
+
+  return filenamefmt
+  .replace('%yyyy%', yyyy)
+  .replace('%yy%', yy)
+  .replace('%mm%', mm)
+  .replace('%dd%', dd)
+  .replace('%hh%', hh)
+  .replace('%ii%', ii)
+  .replace('%ss%', ss)
+  .replace('%filename%', fileName);
 }

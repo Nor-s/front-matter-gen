@@ -1,43 +1,64 @@
 {
-	"name": "jekyll-post",
-	"displayName": "jekyll-post",
-	"description": "Create new Jekyll post from template",
+	"name": "be-like-jekyll",
+	"displayName": "Be Like Jekyll",
+	"description": "Create new Jekyll-like post from template",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.34.0"
 	},
 	"author": {
-		"name": "Rohan Garg",
-		"email": "rhn.grg@gmail.com",
-		"url": "rohgarg.github.io"
+		"name": "Hernawan Faiz Abdillah",
+		"email": "faiz@xifroon.space",
+		"url": "https://xifroon.space"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/rohgarg/jekyll-post"
+		"url": "https://github.com/Abdillah/be-like-jekyll"
 	},
 	"bugs": {
-		"url": "https://github.com/rohgarg/jekyll-post/issues"
+		"url": "https://github.com/Abdillah/be-like-jekyll/issues"
 	},
-	"publisher": "rohgarg",
+	"publisher": "Abdillah",
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.jekyllPost"
+		"onCommand:extension.beLikeJekyll.createPost"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": [
+			{
+				"title": "Be Like Jekyll",
+				"properties": {
+					"belikejekyll.template.path": {
+						"type": "string",
+						"default": ".vscode/template/post",
+						"description": "Path to template file",
+						"scope": "window"
+					},
+					"belikejekyll.instance.filename": {
+						"type": "string",
+						"default": "%yyyy%-%mm%-%dd%-%filename%",
+						"description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%",
+						"scope": "window"
+					}
+				}
+			}
+		],
 		"commands": [
 			{
-				"command": "extension.jekyllPost",
+				"command": "extension.beLikeJekyll.createPost",
 				"title": "New Post"
 			}
 		],
 		"menus": {
-			"explorer/context": [{
-				"command": "extension.jekyllPost",
-				"group": "navigation@2"
-			}]
+			"explorer/context": [
+				{
+					"command": "extension.beLikeJekyll.createPost",
+					"group": "navigation@2"
+				}
+			]
 		}
 	},
 	"scripts": {
