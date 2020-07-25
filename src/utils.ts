@@ -44,7 +44,8 @@ export async function createFile(dirName: string, newFileName: string): Promise<
   const frontMatter = templateExists ? fs.readFileSync(templatePath) : '';
   setFrontMatter(!fileExists && !templateExists);
   if (!fileExists) {
-    fs.appendFileSync(fileName, frontMatter);
+    var frontMatterStr = compileString(frontMatter.toString(), new Date, { 'filename': newFileName });
+    fs.appendFileSync(fileName, frontMatterStr);
   }
   return fileName;
 }
@@ -93,6 +94,35 @@ export function getDateTime(): string {
   return yyyy + '-' + mm + '-' + dd + ' ' + time;
 }
 
+interface CompileParam {
+  [key: string]: string | number;
+}
+
+function compileString(template: string, cdate: Date, params: CompileParam) {
+  var dd = String(cdate.getDate()).padStart(2, '0');
+  var mm = String(cdate.getMonth() + 1).padStart(2, '0');
+  var yyyy = String(cdate.getFullYear());
+  var yy = yyyy.substr(2, 2);
+
+  var hh = String(cdate.getHours());
+  var ii = String(cdate.getMinutes());
+  var ss = String(cdate.getSeconds());
+
+  var result = template
+  .replace('%yyyy%', yyyy)
+  .replace('%yy%', yy)
+  .replace('%mm%', mm)
+  .replace('%dd%', dd)
+  .replace('%hh%', hh)
+  .replace('%ii%', ii)
+  .replace('%ss%', ss);
+
+  for (var k in params) {
+    result = result.replace(`%${k}%`, String(params[k]));
+  }
+  return result;
+}
+
 export function formatFilename(fileName: string): string {
   if (fileName === null) {
     throw undefined;
@@ -100,22 +130,5 @@ export function formatFilename(fileName: string): string {
 
   const filenamefmt: string = vscode.workspace.getConfiguration().get('belikejekyll.instance.filename') || "%yyyy%-%mm%-%dd%-%filename%";
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0');
-  var yyyy = String(today.getFullYear());
-  var yy = yyyy.substr(2, 2);
-
-  var hh = String(today.getHours());
-  var ii = String(today.getMinutes());
-  var ss = String(today.getSeconds());
-
-  return filenamefmt
-  .replace('%yyyy%', yyyy)
-  .replace('%yy%', yy)
-  .replace('%mm%', mm)
-  .replace('%dd%', dd)
-  .replace('%hh%', hh)
-  .replace('%ii%', ii)
-  .replace('%ss%', ss)
-  .replace('%filename%', fileName);
+  return compileString(filenamefmt, today, { 'filename': fileName });
 }
