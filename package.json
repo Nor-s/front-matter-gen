@@ -34,20 +34,17 @@
 					"belikejekyll.enabled": {
 						"type": "boolean",
 						"default": false,
-						"description": "Enable extension (use this to provide workspace-specific setup)",
-						"scope": "window"
+						"description": "Enable extension (use this to provide workspace-specific setup)"
 					},
 					"belikejekyll.template.path": {
 						"type": "string",
 						"default": ".vscode/template/post",
-						"description": "Path to template file",
-						"scope": "window"
+						"description": "Path to template file"
 					},
 					"belikejekyll.instance.filename": {
 						"type": "string",
 						"default": "%yyyy%-%mm%-%dd%-%filename%",
-						"description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%",
-						"scope": "window"
+						"description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%"
 					}
 				}
 			}
@@ -55,16 +52,15 @@
 		"commands": [
 			{
 				"command": "extension.beLikeJekyll.createPost",
-				"title": "New Post",
-				"when": "config.belikejekyll.enabled"
+				"title": "New Post"
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
+					"when": "config.belikejekyll.enabled",
 					"command": "extension.beLikeJekyll.createPost",
-					"group": "navigation@2",
-					"when": "config.belikejekyll.enabled"
+					"group": "navigation@2"
 				}
 			]
 		}
