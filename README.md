@@ -2,7 +2,7 @@
 
 ![Be Like Jekyll](./assets/belikejekyll.png)
 
-[![GitHub license](https://img.shields.io/github/license/Abdillah/vscode-belikejekyll.svg)](https://github.com/Abdillah/vscode-belikejekyll/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/Abdillah/vscode-belikejekyll.svg)](https://GitHub.com/Abdillah/vscode-belikejekyll/issues/)
+[![VSCode Marketplace](https://vsmarketplacebadge.apphb.com/version/Abdillah.belikejekyll.svg)](https://marketplace.visualstudio.com/items?itemName=Abdillah.belikejekyll) [![GitHub license](https://img.shields.io/github/license/Abdillah/vscode-belikejekyll.svg)](https://github.com/Abdillah/vscode-belikejekyll/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/Abdillah/vscode-belikejekyll.svg)](https://GitHub.com/Abdillah/vscode-belikejekyll/issues/)
 
 Markdown Jekyll-like New Post Generator for VS Code.
 
