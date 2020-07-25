@@ -1,4 +1,9 @@
 # Be Like Jekyll
+
+![Be Like Jekyll](./assets/belikejekyll.png)
+
+[![GitHub license](https://img.shields.io/github/license/Abdillah/vscode-be-like-jekyll.svg)](https://github.com/Abdillah/vscode-be-like-jekyll/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/Abdillah/vscode-be-like-jekyll.svg)](https://GitHub.com/Abdillah/vscode-be-like-jekyll/issues/)
+
 Markdown Jekyll-like New Post Generator for VS Code.
 
 This extension makes it easier to create new blog posts for Jekyll-like
