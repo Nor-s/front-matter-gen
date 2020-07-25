@@ -1,84 +1,85 @@
 {
-	"name": "belikejekyll",
-	"displayName": "Be Like Jekyll",
-	"description": "Create new Jekyll-like post from template",
-	"version": "0.0.2",
-	"engines": {
-		"vscode": "^1.34.0"
-	},
-	"author": {
-		"name": "Hernawan Faiz Abdillah",
-		"email": "faiz@xifroon.space",
-		"url": "https://xifroon.space"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Abdillah/vscode-belikejekyll"
-	},
-	"bugs": {
-		"url": "https://github.com/Abdillah/vscode-belikejekyll/issues"
-	},
-	"publisher": "Abdillah",
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.beLikeJekyll.createPost"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"configuration": [
-			{
-				"title": "Be Like Jekyll",
-				"properties": {
-					"belikejekyll.enabled": {
-						"type": "boolean",
-						"default": false,
-						"description": "Enable extension (use this to provide workspace-specific setup)"
-					},
-					"belikejekyll.template.path": {
-						"type": "string",
-						"default": ".vscode/template/post",
-						"description": "Path to template file"
-					},
-					"belikejekyll.instance.filename": {
-						"type": "string",
-						"default": "%yyyy%-%mm%-%dd%-%filename%",
-						"description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%"
-					}
-				}
-			}
-		],
-		"commands": [
-			{
-				"command": "extension.beLikeJekyll.createPost",
-				"title": "New Post"
-			}
-		],
-		"menus": {
-			"explorer/context": [
-				{
-					"when": "config.belikejekyll.enabled",
-					"command": "extension.beLikeJekyll.createPost",
-					"group": "navigation@2"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test",
-		"deploy": "vsce publish --yarn"
-	},
-	"devDependencies": {
-		"@types/mocha": "^2.2.42",
-		"@types/node": "^10.12.21",
-		"tslint": "^5.12.1",
-		"typescript": "^3.3.1",
-		"vsce": "^1.77.0",
-		"vscode": "^1.1.28"
-	}
+    "name": "belikejekyll",
+    "displayName": "Be Like Jekyll",
+    "description": "Create new Jekyll-like post from template",
+    "version": "0.0.2",
+    "icon": "assets/icon.png",
+    "engines": {
+        "vscode": "^1.34.0"
+    },
+    "author": {
+        "name": "Hernawan Faiz Abdillah",
+        "email": "faiz@xifroon.space",
+        "url": "https://xifroon.space"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Abdillah/vscode-belikejekyll"
+    },
+    "bugs": {
+        "url": "https://github.com/Abdillah/vscode-belikejekyll/issues"
+    },
+    "publisher": "Abdillah",
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.beLikeJekyll.createPost"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "configuration": [
+            {
+                "title": "Be Like Jekyll",
+                "properties": {
+                    "belikejekyll.enabled": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Enable extension (use this to provide workspace-specific setup)"
+                    },
+                    "belikejekyll.template.path": {
+                        "type": "string",
+                        "default": ".vscode/template/post",
+                        "description": "Path to template file"
+                    },
+                    "belikejekyll.instance.filename": {
+                        "type": "string",
+                        "default": "%yyyy%-%mm%-%dd%-%filename%",
+                        "description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%"
+                    }
+                }
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.beLikeJekyll.createPost",
+                "title": "New Post"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "config.belikejekyll.enabled",
+                    "command": "extension.beLikeJekyll.createPost",
+                    "group": "navigation@2"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "deploy": "vsce publish --yarn"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^10.12.21",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.1",
+        "vsce": "^1.77.0",
+        "vscode": "^1.1.28"
+    }
 }
