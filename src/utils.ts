@@ -79,7 +79,7 @@ export async function getFileNameFromUser(): Promise<string> {
     value: defaultFileName,
   });
   if (filePath === null || filePath === undefined) {
-    return defaultFileName;
+    throw new Error("Abort");
   }
   return filePath || defaultFileName;
 }

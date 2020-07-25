@@ -9,7 +9,12 @@ activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand('extension.beLikeJekyll.createPost',
     async (uri: vscode.Uri) => {
       const dirName = uri.fsPath;
-      const userFilePath = formatFilename(await getFileNameFromUser());
+      try {
+        var filename = await getFileNameFromUser();
+      } catch(e) {
+        return;
+      }
+      const userFilePath = formatFilename(filename);
       try {
         let editor = await openFile(await createFile(dirName, userFilePath));
         // Insert snippet only if the user did not provide a template file and
