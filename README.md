@@ -1,7 +1,4 @@
 # Be Like Jekyll
-
-![WIP](https://img.shields.io/badge/State-WIP-yellow)
-
 Markdown Jekyll-like New Post Generator for VS Code.
 
 This extension makes it easier to create new blog posts for Jekyll-like
@@ -35,7 +32,7 @@ new posts. The default template is as follows:
 ---
 layout: post,
 title: This is a new article
-date: YYYY-MM-DD HH:MM
+date: %yyyy%-%mm%-%dd% %hh%:%ii%
 category: Category
 author: User
 tags: [tag1, tag2]
@@ -50,13 +47,19 @@ to provide the name of the file.
 ## Features
 
 - Adds a new explorer context menu option to create new blog posts
-- Sets up the file name automatically in the format expected by Jekyll
-  (`YYY-mm-dd-*.*`)
-- Ability to provide a template file for new posts in the Jekyll project root
-  directory
-- If no template file is provided, the extension uses a pre-defined template
-  for new posts. The `Tab` key can be used to move between and edit
-  the different attributes/fields in the front matter.
+- Sets up the file name automatically in the configurable format
+- Ability to provide a template file for new post, use predefined if not supplied
+
+### Supported Placeholder
+The following placeholder can be used both in filename and inside template.
+
+- %yyyy%: Year
+- %mm%: Month
+- %dd%: Day of month
+- %hh%: Hour
+- %ii%: Minute
+- %ss%: Second
+- %filename%: Name of supplied file plus extension
 
 ## Requirements
 
@@ -66,8 +69,3 @@ Code. It may or may not work on earlier releases.
 ## Extension Settings
 
 There are no extension-specific settings for now.
-
-## Todo
-
-* [ ] Location and name of post template file should be configurable
-* [ ] Tab-based navigation with user-provided post template
