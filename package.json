@@ -1,5 +1,5 @@
 {
-	"name": "be-like-jekyll",
+	"name": "belikejekyll",
 	"displayName": "Be Like Jekyll",
 	"description": "Create new Jekyll-like post from template",
 	"version": "0.0.1",
@@ -13,10 +13,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Abdillah/be-like-jekyll"
+		"url": "https://github.com/Abdillah/vscode-belikejekyll"
 	},
 	"bugs": {
-		"url": "https://github.com/Abdillah/be-like-jekyll/issues"
+		"url": "https://github.com/Abdillah/vscode-belikejekyll/issues"
 	},
 	"publisher": "Abdillah",
 	"categories": [
@@ -66,13 +66,15 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+		"test": "npm run compile && node ./node_modules/vscode/bin/test",
+		"deploy": "vsce publish --yarn"
 	},
 	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
+		"@types/mocha": "^2.2.42",
 		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
+		"vsce": "^1.77.0",
+		"vscode": "^1.1.28"
 	}
 }
