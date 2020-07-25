@@ -17,18 +17,15 @@ $\{7\}`;
 
 var insertFrontMatter: boolean = false;
 
-export function
-shouldInsertFrontMatter(): boolean {
+export function shouldInsertFrontMatter(): boolean {
   return insertFrontMatter;
 }
 
-export function
-setFrontMatter(flag: boolean): void {
+export function setFrontMatter(flag: boolean): void {
   insertFrontMatter = flag;
 }
 
-export async function
-createFile(dirName: string, newFileName: string): Promise<string> {
+export async function createFile(dirName: string, newFileName: string): Promise<string> {
   let folders = vscode.workspace.workspaceFolders;
   if (folders === undefined || dirName === null || dirName === undefined) {
     return newFileName;
@@ -52,8 +49,7 @@ createFile(dirName: string, newFileName: string): Promise<string> {
   return fileName;
 }
 
-export async function
-openFile(fileName: string): Promise<vscode.TextEditor> {
+export async function openFile(fileName: string): Promise<vscode.TextEditor> {
   const stats = fs.statSync(fileName);
 
   if (stats.isDirectory()) {
@@ -72,8 +68,7 @@ openFile(fileName: string): Promise<vscode.TextEditor> {
   return editor;
 }
 
-export async function
-getFileNameFromUser(): Promise<string> {
+export async function getFileNameFromUser(): Promise<string> {
   const defaultFileName = "new-post.md";
   let question = `What's the name of the new post?`;
 
@@ -87,8 +82,7 @@ getFileNameFromUser(): Promise<string> {
   return filePath || defaultFileName;
 }
 
-export function
-getDateTime(): string {
+export function getDateTime(): string {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -99,8 +93,7 @@ getDateTime(): string {
   return yyyy + '-' + mm + '-' + dd + ' ' + time;
 }
 
-export function
-formatFilename(fileName: string): string {
+export function formatFilename(fileName: string): string {
   if (fileName === null) {
     throw undefined;
   }
