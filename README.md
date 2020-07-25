@@ -1,6 +1,8 @@
-# Visual Studio Code Extension for Creating Jekyll Posts
+# Markdown Jekyll-like Post Template for VS Code
 
-This extension makes it easier to create new blog posts for Jekyll-based
+![WIP](https://img.shields.io/badge/State-WIP-yellow)
+
+This extension makes it easier to create new blog posts for Jekyll-like
 websites using the Visual Studio Code editor.
 
 Using this extension, a user can create new post file with pre-filled
@@ -15,7 +17,7 @@ a file: `.post-template` in the Jekyll project root directory.
 Here's an example of the template file:
 
 ```bash
-$ cat $PROJECT_ROOT/.post-template
+$ cat $PROJECT_ROOT/.vscode/template/post
 ---
 layout: post
 title: This is a new article
