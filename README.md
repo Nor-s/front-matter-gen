@@ -53,13 +53,13 @@ to provide the name of the file.
 ### Supported Placeholder
 The following placeholder can be used both in filename and inside template.
 
-- %yyyy%: Year
-- %mm%: Month
-- %dd%: Day of month
-- %hh%: Hour
-- %ii%: Minute
-- %ss%: Second
-- %filename%: Name of supplied file plus extension
+- `%yyyy%`: Year
+- `%mm%`: Month
+- `%dd%`: Day of month
+- `%hh%`: Hour
+- `%ii%`: Minute
+- `%ss%`: Second
+- `%filename%`: Name of supplied file plus extension
 
 ## Requirements
 
