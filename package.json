@@ -31,6 +31,12 @@
 			{
 				"title": "Be Like Jekyll",
 				"properties": {
+					"belikejekyll.enabled": {
+						"type": "boolean",
+						"default": false,
+						"description": "Enable extension (use this to provide workspace-specific setup)",
+						"scope": "window"
+					},
 					"belikejekyll.template.path": {
 						"type": "string",
 						"default": ".vscode/template/post",
@@ -49,14 +55,16 @@
 		"commands": [
 			{
 				"command": "extension.beLikeJekyll.createPost",
-				"title": "New Post"
+				"title": "New Post",
+				"when": "config.belikejekyll.enabled"
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
 					"command": "extension.beLikeJekyll.createPost",
-					"group": "navigation@2"
+					"group": "navigation@2",
+					"when": "config.belikejekyll.enabled"
 				}
 			]
 		}
