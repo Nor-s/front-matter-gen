@@ -27,7 +27,8 @@ export function setFrontMatter(flag: boolean): void {
 
 export async function createFile(dirName: string, newFileName: string): Promise<string> {
   let folders = vscode.workspace.workspaceFolders;
-  if (folders === undefined || dirName === null || dirName === undefined) {
+  let folder = folders?.filter(f => dirName.indexOf(f.uri.fsPath) != -1)[0];
+  if (folder === undefined || dirName === null || dirName === undefined) {
     return newFileName;
   }
 
@@ -36,7 +37,7 @@ export async function createFile(dirName: string, newFileName: string): Promise<
   }
 
   const templateName: string = vscode.workspace.getConfiguration().get('belikejekyll.template.path') || ".vscode/template/post";
-  const templatePath = path.resolve(folders[0].uri.fsPath, templateName);
+  const templatePath = path.resolve(folder.uri.fsPath, templateName);
   const fileName = path.resolve(dirName, newFileName);
   const templateExists: boolean = templatePath !== undefined &&
                                   fs.existsSync(templatePath);
