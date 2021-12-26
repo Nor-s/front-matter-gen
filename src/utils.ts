@@ -155,14 +155,7 @@ export async function findTemplate(dirName: string): Promise<string> {
     if (!tFolder || !wsFolder) {
       return "";
     }
-
-    const templatePath = vscode.Uri.file(path.join(wsFolder.uri.fsPath, tFolder));
-
-    try { 
-      await vscode.workspace.fs.stat(templatePath);
-    } catch (e) {
-      return " ";
-    }
+    
     const templates = await vscode.workspace.findFiles(`${tFolder}/**/*`, "**/node_modules/**,**/archetypes/**");
     if (!templates || templates.length === 0) {
       return " ";
