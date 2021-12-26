@@ -1,70 +1,85 @@
 {
-    "name": "belikejekyll",
-    "displayName": "Be Like Jekyll",
-    "description": "Create new Jekyll-like post from template",
-    "version": "0.0.2",
-    "icon": "assets/icon.png",
+    "name": "front-matter-gen",
+    "displayName": "front-matter-gen",
+    "description": "Generator front-matter from template",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.34.0"
     },
     "author": {
-        "name": "Hernawan Faiz Abdillah",
-        "email": "faiz@xifroon.space",
-        "url": "https://xifroon.space"
+        "name": "Nor-s",
+        "url": "https://nor-s.github.io"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Abdillah/vscode-belikejekyll"
+        "url": "https://github.com/Nor-s/front-matter-gen"
     },
     "bugs": {
-        "url": "https://github.com/Abdillah/vscode-belikejekyll/issues"
+        "url": "https://github.com/Nor-s/front-matter-gen/issues"
     },
-    "publisher": "Abdillah",
+    "publisher": "Nor-s",
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.beLikeJekyll.createPost"
+        "onCommand:extension.frontmattergen.createPost"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "configuration": [
             {
-                "title": "Be Like Jekyll",
+                "title": "Front Matter Gen",
                 "properties": {
-                    "belikejekyll.enabled": {
+                    "frontmattergen.enabled": {
                         "type": "boolean",
                         "default": false,
                         "description": "Enable extension (use this to provide workspace-specific setup)"
                     },
-                    "belikejekyll.template.path": {
+                    "frontmattergen.template.path": {
                         "type": "string",
-                        "default": ".vscode/template/post",
+                        "default": ".vscode/fmg_templates",
                         "description": "Path to template file"
                     },
-                    "belikejekyll.instance.filename": {
+                    "frontmattergen.instance.filename": {
                         "type": "string",
                         "default": "%yyyy%-%mm%-%dd%-%filename%",
                         "description": "Filename pattern, use placeholders: %yyyy%, %mm%, %dd%, %hh%, %ii%, %ss%, %filename%"
+                    },
+                    "frontmattergen.filename.extension": {
+                        "type": "string",
+                        "default": ".md",
+                        "description": "Filename extension"
+                    },
+                    "frontmattergen.filename.default": {
+                        "type": "string",
+                        "default": "new-post",
+                        "description": "Filename"
                     }
                 }
             }
         ],
         "commands": [
             {
-                "command": "extension.beLikeJekyll.createPost",
-                "title": "New Post"
+                "command": "extension.frontmattergen.createPost",
+                "title": "New Post",
+                "enablement": "" 
             }
         ],
         "menus": {
             "explorer/context": [
                 {
-                    "when": "config.belikejekyll.enabled",
-                    "command": "extension.beLikeJekyll.createPost",
+                    "when": "config.frontmattergen.enabled",
+                    "command": "extension.frontmattergen.createPost",
                     "group": "navigation@2"
                 }
             ]
-        }
+        }, 
+         "commandPalette": [{
+   
+          "command": "extension.frontmattergen.createPost",
+          "when": "false"
+ 
+         }]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
