@@ -27,7 +27,7 @@ export function setFrontMatter(flag: boolean): void {
 
 export async function createFile(dirName: string, newFileName: string): Promise<string> {
   let folders = vscode.workspace.workspaceFolders;
-  let folder = folders?.filter(f => dirName.indexOf(f.uri.fsPath) != -1)[0];
+  let folder = folders?.filter(f => dirName.indexOf(f.uri.fsPath) !== -1)[0];
   if (folder === undefined || dirName === null || dirName === undefined) {
     return newFileName;
   }
@@ -45,7 +45,17 @@ export async function createFile(dirName: string, newFileName: string): Promise<
   const frontMatter = templateExists ? fs.readFileSync(templatePath) : '';
   setFrontMatter(!fileExists && !templateExists);
   if (!fileExists) {
-    var frontMatterStr = compileString(frontMatter.toString(), new Date, { 'filename': newFileName });
+     let cparam: any = {
+       'filename' : newFileName ,
+      };
+      let dirs = dirName.split("\\");
+      for(let i = dirs.length-1 ; i > 0; i-- ) {
+        cparam['dir' + (dirs.length-1 - i)] = dirs[i];
+      }
+      
+    var frontMatterStr = compileString(
+      frontMatter.toString(),
+       new Date, cparam);
     fs.appendFileSync(fileName, frontMatterStr);
   }
   return fileName;
@@ -110,16 +120,17 @@ function compileString(template: string, cdate: Date, params: CompileParam) {
   var ss = String(cdate.getSeconds());
 
   var result = template
-  .replace('%yyyy%', yyyy)
-  .replace('%yy%', yy)
-  .replace('%mm%', mm)
-  .replace('%dd%', dd)
-  .replace('%hh%', hh)
-  .replace('%ii%', ii)
-  .replace('%ss%', ss);
+  .replace(/%yyyy%/gi, yyyy)
+  .replace(/%yy%/gi, yy)
+  .replace(/%mm%/gi, mm)
+  .replace(/%dd%/gi, dd)
+  .replace(/%hh%/gi, hh)
+  .replace(/%ii%/gi, ii)
+  .replace(/%ss%/gi, ss);
 
   for (var k in params) {
-    result = result.replace(`%${k}%`, String(params[k]));
+    const regex =  new RegExp(`%${k}%`, 'gi');
+    result = result.replace(regex, String(params[k]));
   }
   return result;
 }
