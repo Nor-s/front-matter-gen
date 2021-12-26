@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import { error } from 'console';
 
 export const postSnippet: string =
 `---
@@ -25,7 +26,7 @@ export function setFrontMatter(flag: boolean): void {
   insertFrontMatter = flag;
 }
 
-export async function createFile(dirName: string, newFileName: string): Promise<string> {
+export async function createFile(dirName: string, newFileName: string, userTemplateName: string): Promise<string> {
   let folders = vscode.workspace.workspaceFolders;
   let folder = folders?.filter(f => dirName.indexOf(f.uri.fsPath) !== -1)[0];
   if (folder === undefined || dirName === null || dirName === undefined) {
@@ -36,7 +37,7 @@ export async function createFile(dirName: string, newFileName: string): Promise<
     dirName = path.dirname(dirName);
   }
 
-  const templateName: string = vscode.workspace.getConfiguration().get('belikejekyll.template.path') || ".vscode/template/post";
+  const templateName: string = vscode.workspace.getConfiguration().get('frontmattergen.template.path') + "/" + userTemplateName ;
   const templatePath = path.resolve(folder.uri.fsPath, templateName);
   const fileName = path.resolve(dirName, newFileName);
   const templateExists: boolean = templatePath !== undefined &&
@@ -45,19 +46,17 @@ export async function createFile(dirName: string, newFileName: string): Promise<
   const frontMatter = templateExists ? fs.readFileSync(templatePath) : '';
   setFrontMatter(!fileExists && !templateExists);
   if (!fileExists) {
-     let cparam: any = {
-       'filename' : newFileName ,
-      };
-      let dirs = dirName.split("\\");
-      for(let i = dirs.length-1 ; i > 0; i-- ) {
-        cparam['dir' + (dirs.length-1 - i)] = dirs[i];
-      }
+    // placeholder
+    let cparam: any = {'filename' : newFileName ,};
+    let dirs = dirName.split("\\");
+    for(let i = dirs.length-1 ; i > 0; i-- ) {
+      cparam['dir' + (dirs.length-1 - i)] = dirs[i];
+    }
       
-    var frontMatterStr = compileString(
-      frontMatter.toString(),
-       new Date, cparam);
+    var frontMatterStr = compileString(frontMatter.toString(),new Date, cparam);
     fs.appendFileSync(fileName, frontMatterStr);
   }
+
   return fileName;
 }
 
@@ -81,7 +80,7 @@ export async function openFile(fileName: string): Promise<vscode.TextEditor> {
 }
 
 export async function getFileNameFromUser(): Promise<string> {
-  const defaultFileName = "new-post.md";
+  const defaultFileName:any = vscode.workspace.getConfiguration().get<string>("frontmattergen.filename.default");
   let question = `What's the name of the new post?`;
 
   let filePath = await vscode.window.showInputBox({
@@ -137,10 +136,42 @@ function compileString(template: string, cdate: Date, params: CompileParam) {
 
 export function formatFilename(fileName: string): string {
   if (fileName === null) {
-    throw undefined;
+    throw error;
+  }
+  if(fileName.indexOf(".") === -1) {
+    fileName += vscode.workspace.getConfiguration().get('frontmattergen.filename.extension');
   }
 
-  const filenamefmt: string = vscode.workspace.getConfiguration().get('belikejekyll.instance.filename') || "%yyyy%-%mm%-%dd%-%filename%";
+  const filenamefmt: string = vscode.workspace.getConfiguration().get('frontmattergen.instance.filename') || "%yyyy%-%mm%-%dd%-%filename%";
   var today = new Date();
   return compileString(filenamefmt, today, { 'filename': fileName });
+}
+
+export async function findTemplate(dirName: string): Promise<string> {
+    const tFolder = vscode.workspace.getConfiguration().get<string>('frontmattergen.template.path');
+    let folders = vscode.workspace.workspaceFolders;
+    let wsFolder = folders?.filter(f => dirName.indexOf(f.uri.fsPath) !== -1)[0];
+    
+    if (!tFolder || !wsFolder) {
+      return "";
+    }
+
+    const templatePath = vscode.Uri.file(path.join(wsFolder.uri.fsPath, tFolder));
+
+    try { 
+      await vscode.workspace.fs.stat(templatePath);
+    } catch (e) {
+      return " ";
+    }
+    const templates = await vscode.workspace.findFiles(`${tFolder}/**/*`, "**/node_modules/**,**/archetypes/**");
+    if (!templates || templates.length === 0) {
+      return " ";
+    }
+    if(templates.length === 1) {
+      return  templates.map(t => path.basename(t.fsPath))[0];
+    }
+    const selectedTemplate: any = await vscode.window.showQuickPick(templates.map(t => path.basename(t.fsPath)), {
+      placeHolder: `Select the template to use`
+    });
+    return selectedTemplate;
 }
