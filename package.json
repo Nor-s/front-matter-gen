@@ -8,7 +8,8 @@
     },
     "author": {
         "name": "Nor-s",
-        "url": "https://nor-s.github.io"
+        "email": "returns03@naver.com",
+        "url": "https://github.com/Nor-s"
     },
     "repository": {
         "type": "git",
@@ -62,7 +63,7 @@
             {
                 "command": "extension.frontmattergen.createPost",
                 "title": "New Post",
-                "enablement": "" 
+                "enablement": ""
             }
         ],
         "menus": {
@@ -73,13 +74,13 @@
                     "group": "navigation@2"
                 }
             ]
-        }, 
-         "commandPalette": [{
-   
-          "command": "extension.frontmattergen.createPost",
-          "when": "false"
- 
-         }]
+        },
+        "commandPalette": [
+            {
+                "command": "extension.frontmattergen.createPost",
+                "when": "false"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
