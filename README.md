@@ -1,7 +1,6 @@
 # Front Matter Gen
 
-<img src = "assets\template_test.gif" width="100%" height="100%" title="n=8" alt="n=8"></img>
-
+![screenshot](./assets/template_test.gif)
 Markdown Front Matter Generator for VS Code.
 
 This extension makes it easier to create new blog posts for Jekyll-like
