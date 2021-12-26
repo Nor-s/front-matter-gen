@@ -1,10 +1,8 @@
-# Be Like Jekyll
+# Front Matter Gen
 
-![Be Like Jekyll](./assets/belikejekyll.png)
+<img src = "assets\template_test.gif" width="100%" height="100%" title="n=8" alt="n=8"></img>
 
-[![VSCode Marketplace](https://vsmarketplacebadge.apphb.com/version/Abdillah.belikejekyll.svg)](https://marketplace.visualstudio.com/items?itemName=Abdillah.belikejekyll) [![GitHub license](https://img.shields.io/github/license/Abdillah/vscode-belikejekyll.svg)](https://github.com/Abdillah/vscode-belikejekyll/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/Abdillah/vscode-belikejekyll.svg)](https://GitHub.com/Abdillah/vscode-belikejekyll/issues/)
-
-Markdown Jekyll-like New Post Generator for VS Code.
+Markdown Front Matter Generator for VS Code.
 
 This extension makes it easier to create new blog posts for Jekyll-like
 websites using the Visual Studio Code editor.
@@ -15,17 +13,27 @@ user or the extension will use its built-in template.
 
 ## Usage instructions
 
+1. settings.json: `frontmattergen.enabled` = true
+2. right click on a directory in the explorer menu
+3. select the "New Post" option.
+4. select template (case template file > 1)
+5. a dialog box prompts the user
+   to provide the name of the file.
+
 If a user wants to provide a template file for new posts, they should create
-a file: `.vscode/template/post` relative to current project root directory.
+a file: `.vscode/fmg_templates/{file}` relative to current project root directory.
 
 Here's an example of the template file:
 
 ```bash
-$ cat $PROJECT_ROOT/.vscode/template/post
+$ cat $PROJECT_ROOT/.vscode/fmg_templates/post
 ---
 layout: post
-title: This is a new article
+title:
+date: %yyyy%-%mm%-%dd%T%hh%:%ii%:%ss%Z
+category: %dir0%
 author: User
+tags: [tag1, tag2]
 summary: Summary of the article
 ---
 ```
@@ -45,10 +53,6 @@ summary: Summary of the article
 ---
 ```
 
-To create a new post, a user must right click on a directory in the explorer
-menu and select the "New Post" option. Then, a dialog box prompts the user
-to provide the name of the file.
-
 ## Features
 
 - Adds a new explorer context menu option to create new blog posts
@@ -56,6 +60,7 @@ to provide the name of the file.
 - Ability to provide a template file for new post, use predefined if not supplied
 
 ### Supported Placeholder
+
 The following placeholder can be used both in filename and inside template.
 
 - `%yyyy%`: Year
@@ -65,12 +70,36 @@ The following placeholder can be used both in filename and inside template.
 - `%ii%`: Minute
 - `%ss%`: Second
 - `%filename%`: Name of supplied file plus extension
+- `%dir0%`: Name of file's dirname
+
+dir name : dir0~N
+
+```
+ file's path : D:\workspaceFolders\category1\category2\2021-12-26-new-post.md
+```
+
+- `%dir0%`: category2
+- `%dir1%`: category1
+- `%dir2%`: workspaceFolders
 
 ## Requirements
 
-This has only been tested on the latest release (v.1.34.0) of Visual Studio
+This has only been tested on the latest release (v.1.63.2) of Visual Studio
 Code. It may or may not work on earlier releases.
 
 ## Extension Settings
 
-There are no extension-specific settings for now.
+- `frontmattergen.enabled`: enable extension
+- `frontmattergen.template.path`: template path
+- `frontmattergen.instance.filename`: filename pattern
+- `frontmattergen.filename.extension`: filename extension
+- `frontmattergen.filename.default`: new filename
+
+---
+
+I added the code from the repository below.
+
+- https://github.com/rohgarg/jekyll-post
+- https://github.com/Abdillah/vscode-belikejekyll
+
+---
