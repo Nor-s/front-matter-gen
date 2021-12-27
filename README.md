@@ -1,6 +1,7 @@
 # Front Matter Gen
 
-![screenshot](./assets/template_test.gif)
+> This is a fork of vscode-belikejekyll that adds dirname place holder and multi templates.
+
 Markdown Front Matter Generator for VS Code.
 
 This extension makes it easier to create new blog posts for Jekyll-like
@@ -11,6 +12,8 @@ Using this extension, a user can create new post file with pre-filled
 user or the extension will use its built-in template.
 
 ## Usage instructions
+
+![screenshot](./assets/template_test.gif)
 
 1. settings.json: `frontmattergen.enabled` = true
 2. right click on a directory in the explorer menu
