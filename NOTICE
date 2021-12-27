@@ -1,0 +1,6 @@
+This is a fork of Abdillah/vscode-belikejekyll and rohgarg/jekyll-post.
+
+I added a dirname placeholder and made it possible to select multiple user templates.
+
+- https://github.com/rohgarg/jekyll-post
+- https://github.com/Abdillah/vscode-belikejekyll

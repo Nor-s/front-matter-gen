@@ -1,6 +1,6 @@
 # Front Matter Gen
 
-> This is a fork of vscode-belikejekyll that adds dirname place holder and multi templates.
+> This is a fork of Abdillah/vscode-belikejekyll and rohgarg/jekyll-post. I added a dirname placeholder and made it possible to select multiple user templates.
 
 Markdown Front Matter Generator for VS Code.
 
@@ -98,8 +98,6 @@ Code. It may or may not work on earlier releases.
 - `frontmattergen.filename.default`: new filename
 
 ---
-
-I added the code from the repository below.
 
 - https://github.com/rohgarg/jekyll-post
 - https://github.com/Abdillah/vscode-belikejekyll
