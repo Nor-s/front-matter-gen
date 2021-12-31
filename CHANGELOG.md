@@ -1,10 +1,17 @@
 # Change Log
 
-All notable changes to the extension will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](https://semver.org/).
-
 ## [0.0.1]
 
 - Initial release
+
+## [0.0.2]
+
+- Add placeholder
+
+## [0.0.3]
+
+- Add placeholder for dirname
+
+## [0.0.5]
+
+- Fix mac os error
