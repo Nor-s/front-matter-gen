@@ -48,10 +48,13 @@ export async function createFile(dirName: string, newFileName: string, userTempl
   if (!fileExists) {
     // placeholder
     let cparam: any = {'filename' : newFileName ,};
-    let dirs = dirName.split("\\");
-    for(let i = dirs.length-1 ; i > 0; i-- ) {
-      cparam['dir' + (dirs.length-1 - i)] = dirs[i];
-    }
+    dirName = dirName.replace(/\\/g,"/");
+    const dirs = dirName.split(/\//g);
+    if(dirs != null) {
+      for(let i = dirs.length-1 ; i >= 0; i-- ) {
+        cparam['dir' + (dirs.length-1 - i)] = dirs[i];
+      }
+    } 
       
     var frontMatterStr = compileString(frontMatter.toString(),new Date, cparam);
     fs.appendFileSync(fileName, frontMatterStr);
