@@ -117,9 +117,9 @@ function compileString(template: string, cdate: Date, params: CompileParam) {
   var yyyy = String(cdate.getFullYear());
   var yy = yyyy.substr(2, 2);
 
-  var hh = String(cdate.getHours());
-  var ii = String(cdate.getMinutes());
-  var ss = String(cdate.getSeconds());
+  var hh = String(cdate.getHours()).padStart(2, '0');
+  var ii = String(cdate.getMinutes()).padStart(2, '0');
+  var ss = String(cdate.getSeconds()).padStart(2, '0');
 
   var result = template
   .replace(/%yyyy%/gi, yyyy)
