@@ -22,4 +22,4 @@
 
 ## [0.0.7]
 
-- Fix data format
+- [#1](https://github.com/Nor-s/front-matter-gen/pull/1) Fix data format 
